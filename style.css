@@ -8,8 +8,10 @@ body {
 }
 
 .container {
-  padding: 50px 20px;
+  position: relative;
+  z-index: 2;
 }
+
 
 h1 {
   font-size: 2.5em;
@@ -33,48 +35,7 @@ h1 {
   font-size: 1.2em;
   margin-top: 30px;
   font-style: italic;
-}
 
-/* Hearts animation */
-.hearts {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: -1;
-}
-.heart {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: red;
-  transform: rotate(-45deg);
-  animation: float 5s linear infinite;
-}
-.heart::before,
-.heart::after {
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: red;
-  border-radius: 50%;
-}
-.heart::before {
-  top: -10px;
-  left: 0;
-}
-.heart::after {
-  top: 0;
-  left: 10px;
-}
-
-@keyframes float {
-  0% { transform: translateY(0) rotate(-45deg); opacity: 1; }
-  100% { transform: translateY(-1000px) rotate(-45deg); opacity: 0; }
 }
 body {
   margin: 0;
@@ -145,12 +106,8 @@ h1 {
   transform: scale(1.05);
   box-shadow: 0 0 60px rgba(0,0,0,0.6);
 }
-.heart {
-  background: #c29ed7; /* soft purple */
-}
-.heart::before, .heart::after {
-  background: #c29ed7;
-}
+
+
 .signature {
   font-size: 1.4em;
   font-style: italic;
@@ -175,4 +132,61 @@ h1 {
   font-size: 2em;
   color: #d6336c;
   margin-bottom: 15px;
+
+}
+body {
+  margin: 0;
+  font-family: 'Dancing Script', cursive;
+  text-align: center;
+  overflow-x: hidden;
+  background: linear-gradient(150deg, #3e3a4c, #6b5b7b);
+  color: #f0e1eb;
+}
+.heart {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #c29ed7;  /* this sets the heart color */
+  transform: rotate(-45deg);
+  animation: floatUp 4s linear infinite;
+  opacity: 0.8;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #c29ed7;  /* must match the main heart */
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -9px;
+  left: 0;
+}
+
+.heart::after {
+  top: 0;
+  left: 9px;
+}
+
+
+/* Smooth floating animation */
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) scale(0.8);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1.2);
+    opacity: 0;
+  }
+}
+.heart {
+  animation: floatUp 4s linear infinite;
 }
